@@ -18,11 +18,21 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.tarefas = [];
                 }
+                AppComponent.prototype.adicionar = function () {
+                    if (this.txtTarefa != '') {
+                        this.tarefas.push(this.txtTarefa);
+                        this.txtTarefa = '';
+                    }
+                };
+                AppComponent.prototype.remover = function (index) {
+                    this.tarefas.splice(index, 1);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'meu-app',
-                        template: '<h1>Meu primeiro app com o Angular 2!!!</h1>'
+                        template: "\n        <h1>Tarefas</h1>\n        <h2>Lista de Tarefas</h2>\n        <ul>\n            <li *ngFor=\"#tarefa of tarefas; #i = index\">\n                {{tarefa}} <a href=\"#\" (click)=\"remover(i)\">[X]</a>\n            </li>\n        </ul>\n        <input type=\"text\" name=\"tarefa\" placeholder=\"Digite a Tarefa\" [(ngModel)]=\"txtTarefa\">\n        <button (click)=\"adicionar()\">Adicionar</button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
